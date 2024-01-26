@@ -1,23 +1,10 @@
-from collections import deque
-from math import ceil
+N = int(input())
+arr = list(range(1, N+1))
 
-n = int(input())
+while len(arr) != 1:
+    arr2 = []
+    for a in arr[1::2]:
+        arr2.append(a)
+    arr = arr2
 
-data = deque()
-
-for i in range(1, n+1):
-    data.append(i)
-
-while len(data) != 1:
-    count = ceil(len(data)/2)
-
-    if len(data) % 2 == 0:
-        for i in range(count):
-            data.popleft()
-            data.append(data.popleft())
-    else:
-        for i in range(count):
-            data.popleft()
-            data.append(data.popleft())
-        data.append(data.popleft())
-print(data[0])
+print(arr[0])

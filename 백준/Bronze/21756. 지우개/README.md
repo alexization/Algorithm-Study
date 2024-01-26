@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 35380 KB, 시간: 60 ms
+메모리: 31120 KB, 시간: 40 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2024년 1월 26일 21:12:35
+2024년 1월 26일 21:16:48
 
 ### 문제 설명
 
@@ -20,7 +20,7 @@
 
 <p>아래 그림은 <mjx-container class="MathJax" jax="CHTML" style="font-size: 109%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D441 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c37"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi><mo>=</mo><mn>7</mn></math></mjx-assistive-mml><span aria-hidden="true" class="no-mathjax mjx-copytext">$N = 7$</span></mjx-container>일 때의 예이다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 361px; height: 90px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/1587dd00-130c-42a0-af6e-68b3b484a1b8/-/preview/" style="width: 361px; height: 90px;"></p>
 
 <p>다음 작업을 수가 정확히 하나가 남을 때 까지 반복한다.</p>
 
@@ -28,17 +28,17 @@
 
 <p>제일 첫 작업의 (A) 단계가 끝나면 칸들의 상태는 다음과 같을 것이다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 361px; height: 90px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/1bedbcf7-ee56-4bb0-a83b-d6abbb34ae46/-/preview/" style="width: 361px; height: 90px;"></p>
 
 <p>(B) 단계가 끝나면 다음과 같을 것이다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 361px; height: 90px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/7f311585-5dd0-4033-ada3-5fb9aa0df18b/-/preview/" style="width: 361px; height: 90px;"></p>
 
 <p>두번째 작업이 진행되면 칸들은 아래 두 그림과 같이 바뀔 것이다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 361px; height: 90px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/e070dc76-59fc-4fa6-a0b3-bf310f78dccd/-/preview/" style="width: 361px; height: 90px;"></p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 361px; height: 90px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/e7c0cbf8-ab7d-4b7c-bdac-28b433c83c95/-/preview/" style="width: 361px; height: 90px;"></p>
 
 <p>이제 수가 하나 남았으므로 작업은 더 이상 진행되지 않는다.</p>
 
