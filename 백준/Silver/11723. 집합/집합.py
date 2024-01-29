@@ -1,37 +1,39 @@
 import sys
 
-m = int(sys.stdin.readline().strip())
-S = set()
+input = sys.stdin.readline
+m = int(input().strip())
+data = set()
 
-for _ in range(m):
-    commands = sys.stdin.readline().strip().split()
+for i in range(m):
 
-    # num이 없는 경우 -> all, empty
-    if len(commands) == 1:
-        # all
-        if commands[0] == "all":
-            S = set(list(range(1, 21)))
-        # empty
-        else:
-            S = set()
-    
-    # num이 있는 경우
+    input_data = input().strip()
+
+    if input_data == 'all':
+        c = 'all'
+    elif input_data == 'empty':
+        c = 'empty'
     else:
-        command, num = commands[0], commands[1]
-        num = int(num)
-        
-        # add
-        if command == "add":
-            S.add(num)
-        # remove
-        elif command == "remove":
-            S.discard(num)
-        # check
-        elif command == "check":
-            print(1 if num in S else 0)
-        # toggle
-        elif command == "toggle":
-            if num in S:
-                S.discard(num)
-            else:
-                S.add(num)
+        c, val = input_data.split(' ')
+
+    if c == 'add':
+        data.add(val)
+
+    elif c == 'remove':
+        data.discard(val)
+
+    elif c == 'check':
+        if val in data:
+            print("1")
+        else:
+            print("0")
+
+    elif c == 'toggle':
+        if val in data:
+            data.discard(val)
+        else:
+            data.add(val)
+
+    elif c == 'all':
+        data = set(str(i) for i in range(1, 21))
+    elif c == 'empty':
+        data = set()
