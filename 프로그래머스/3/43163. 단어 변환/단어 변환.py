@@ -1,6 +1,6 @@
 def solution(begin, target, words):
     answer = 0
-    used = []
+    used = set()
     
     global result_return
     result_return = []
@@ -14,6 +14,7 @@ def solution(begin, target, words):
     return answer
 
 def dfs(begin, target, words, used, result):
+    print(begin, used, result)
     if begin == target:
         result_return.append(result)
         return
@@ -26,7 +27,7 @@ def dfs(begin, target, words, used, result):
                 
         if count == 1:
             if word not in used:
-                used.append(begin)
+                used.add(begin)
                 begin = word
                 result += 1
                 dfs(begin, target, words, used, result)
