@@ -1,21 +1,17 @@
+import copy
+
 def solution(number, k):
     answer = ''
-    stack = []
+    newStr = number[:k*2]
+    leftStr = number[k*2:]
     
-    for n in number:
-        while True:
-            if k <= 0:
-                break
-            if stack and stack[-1] < n :
-                stack.pop()
-                k -= 1
-            else:
-                break
-                
-        stack.append(n)
+    newList = list(newStr)
+    result = copy.deepcopy(newList)
+    newList.sort()
+    delList = newList[:k]
+    
+    for i in delList:
+        result.remove(i)
         
-    while k > 0:
-        stack.pop()
-        k -= 1
-        
-    return ''.join(stack)
+    answer = ''.join(result) + leftStr
+    return answer
