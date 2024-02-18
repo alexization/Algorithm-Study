@@ -1,33 +1,36 @@
-import heapq
-n, m, k, start = map(int, input().split())
-INF = int(1e9)
-graph = [[] for i in range(n+1)]
-distance = [INF] * (n+1)
+from collections import deque
+from math import dist
+import sys
+
+input = sys.stdin.readline
+n, m, k, x = map(int, input().split())
+
+graph = [[] for _ in range(n+1)]
+distance = [-1] * (n+1)
+distance[x] = 0
+
 for _ in range(m):
     a, b = map(int, input().split())
-    graph[a].append((b, 1))
+    graph[a].append(b)
 
-def dijkstra(start):
-    q = []
-    heapq.heappush(q, (0, start))
-    distance[start] = 0
-    while q:
-        dist, now = heapq.heappop(q)
-        if distance[now] < dist:
-            continue
-        for i in graph[now]:
-            cost = dist + i[1]
-            if cost < distance[i[0]]:
-                distance[i[0]] = cost
-                heapq.heappush(q, (cost, i[0]))
+def bfs(start):
+    dq = deque()
+    dq.append(start)
 
-dijkstra(start)
-idx_list = []
+    while dq:
+        a = dq.popleft()
+        for i in graph[a]:
+            if distance[i] == -1:
+                distance[i] = distance[a] + 1
+                dq.append(i)
+
+bfs(x)
+
+flag = False
 for i in range(1, n+1):
     if k == distance[i]:
-        idx_list.append(i)
+        flag = True
+        print(i)
 
-if idx_list:
-    print('\n'.join(map(str, idx_list)))
-else:
+if flag == False:
     print(-1)
