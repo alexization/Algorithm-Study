@@ -1,31 +1,32 @@
 import sys
-
 input = sys.stdin.readline
-N = int(input())
-house = []
-for _ in range(N):
-    house.append(list(map(int, input().split())))
-total = 0
 
+n = int(input())
+graph = [list(map(int, input().split())) for _ in range(n)]
 
-def dfs(x, y, direction):
-    global total
-    if x == N - 1 and y == N - 1 and house[x][y] == 0:
-        total += 1
+result = 0
+# dir -> 0 : 가로, 1 : 세로 , 2 : 대각선 
+def dfs(x, y, dir):
+    global result
+    
+    if x == n-1 and y == n-1:
+        result += 1
         return
-    if direction == 0 or direction == 2:
-        if y  < N - 1:
-            if house[x][y + 1] == 0:
-                dfs(x, y + 1, 0)
-    if direction == 1 or direction == 2:
-        if x < N - 1:
-            if house[x + 1][y] == 0:
-                dfs(x + 1, y, 1)
-    if direction == 0 or direction == 1 or direction == 2:
-        if x < N - 1 and y < N - 1:
-            if house[x + 1][y] == 0 and house[x][y + 1] == 0 and house[x + 1][y + 1] == 0:
-                dfs(x + 1, y + 1, 2)
+    
+    if dir == 0 or dir == 2:
+        if y + 1 < n:
+            if graph[x][y+1] == 0:
+                dfs(x, y+1, 0)
+
+    if dir == 1 or dir == 2:
+        if x + 1 < n:
+            if graph[x+1][y] == 0:
+                dfs(x+1, y, 1)
+    
+    if x + 1 < n and y + 1 < n:
+        if graph[x+1][y+1] == 0 and graph[x][y+1] == 0 and graph[x+1][y] == 0:
+            dfs(x+1, y+1, 2)
 
 
 dfs(0, 1, 0)
-print(total)
+print(result)
