@@ -1,23 +1,20 @@
 import sys
-
 input = sys.stdin.readline
 
 n = int(input())
-data = []
-
-for i in range(n):
+meetings = []
+for _ in range(n):
     s, e = map(int, input().split())
-    data.append([s, e])
+    meetings.append((s, e))
 
-data.sort(key=lambda x: [x[1], x[0]])
+meetings.sort(key=lambda x: (x[1], x[0]))
 
-count = 1
-end_time = data[0][1]
-for i in range(1, n):
-    if end_time > data[i][0]:
+endTime = meetings[0][1]
+result = 1
+for start, end in meetings[1:]:
+    if endTime > start:
         continue
+    endTime = end
+    result += 1
 
-    end_time = data[i][1]
-    count += 1
-
-print(count)
+print(result)
