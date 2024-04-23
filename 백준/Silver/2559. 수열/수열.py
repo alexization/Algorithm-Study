@@ -2,16 +2,12 @@ import sys
 input = sys.stdin.readline
 
 n, k = map(int, input().split())
-temps = list(map(int, input().split()))
+arr = list(map(int, input().split()))
+result = sum(arr[:k])
 
-tempArr = []
-value = 0
-for temp in temps:
-    value += temp
-    tempArr.append(value)
+temp = result
+for i in range(k, n):
+    temp += arr[i] - arr[i-k]
+    result = max(result, temp)
 
-maxValue = tempArr[k-1]
-for i in range(n-k):
-    maxValue = max(maxValue, (tempArr[i+k] - tempArr[i]))
-
-print(maxValue)
+print(result)
