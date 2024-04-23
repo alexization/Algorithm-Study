@@ -1,33 +1,25 @@
 import sys
-from collections import deque
 input = sys.stdin.readline
 
-n, x = map(int, input().split())
-visitors = deque(map(int, input().split()))
-tempQ = deque()
+x, n = map(int, input().split())
+visitors = list(map(int, input().split()))
 
-maxVisitors = 0
-maxDays = 1
-for _ in range(x):
-    value = visitors.popleft()
-    tempQ.append(value)
-    maxVisitors += value
+window = sum(visitors[:n])
+maxValue = window
+maxCount = 1
 
-dayVisitors = maxVisitors
-for value in visitors:
-    minusValue = tempQ.popleft()
-    dayVisitors -= minusValue
-    tempQ.append(value)
-    dayVisitors += value
+for i in range(n, x):
+    window -= visitors[i-n]
+    window += visitors[i]
     
-    if dayVisitors > maxVisitors:
-        maxVisitors = dayVisitors
-        maxDays = 1
-    elif dayVisitors == maxVisitors:
-        maxDays += 1
+    if window > maxValue:
+        maxValue = window
+        maxCount = 1
+    elif window == maxValue:
+        maxCount += 1
 
-if maxVisitors == 0:
+if maxValue == 0:
     print('SAD')
 else:
-    print(maxVisitors)
-    print(maxDays)
+    print(maxValue)
+    print(maxCount)
