@@ -1,28 +1,24 @@
-from collections import deque
 import sys
+from collections import deque
+
 input = sys.stdin.readline
 
-dx = [-1, 0, 1, 0, -1, 1, -1, 1]
-dy = [0, -1, 0, 1, 1, 1, -1, -1]
+dx = [-1, 0, 1, 0, -1, -1, 1, 1]
+dy = [0, -1, 0, 1, -1, 1, -1, 1]
 
-def bfs(x, y, visited):
+def bfs(x, y):
     q = deque()
-    visited[x][y] = True
     q.append((x, y))
+    visited[x][y] = True
     while q:
         x, y = q.popleft()
         for i in range(8):
             nx = x + dx[i]
             ny = y + dy[i]
-            if nx < 0 or ny < 0 or nx >= m or ny >= n:
-                continue
-            if visited[nx][ny] == True:
-                continue
-            if graph[nx][ny] == 0:
-                continue
-            visited[nx][ny] = True
-            q.append((nx, ny))
-
+            if 0 <= nx < m and 0 <= ny < n:
+                if graph[nx][ny] == 1 and visited[nx][ny] == False:
+                    visited[nx][ny] = True
+                    q.append((nx, ny))
 
 while True:
     n, m = map(int, input().split())
@@ -36,7 +32,7 @@ while True:
     for i in range(m):
         for j in range(n):
             if graph[i][j] == 1 and visited[i][j] == False:
-                bfs(i, j, visited)
                 count += 1
+                bfs(i, j)
     
     print(count)
