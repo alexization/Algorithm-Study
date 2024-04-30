@@ -46,7 +46,7 @@ for test_case in range(1, T + 1):
     for k in range(1, q+1):
         l, r = map(int, input().split())
         for i in range(l, r+1):
-            arr[i] = str(k)
+            arr[i] = k
     
     print(f"#{test_case}", end=' ')
     print(*arr[1:])
