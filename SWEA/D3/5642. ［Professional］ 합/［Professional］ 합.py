@@ -44,7 +44,7 @@ for test_case in range(1, T + 1):
     dp = list(map(int, input().split()))
     
     for i in range(1, n):
-        if dp[i-1] + dp[i] >= 0 and dp[i] < dp[i-1] + dp[i]:
+        if dp[i] < dp[i-1] + dp[i]:
             dp[i] = dp[i-1] + dp[i]
     
     dp.sort(reverse=True)
