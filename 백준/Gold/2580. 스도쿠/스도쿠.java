@@ -7,6 +7,7 @@ public class Main {
 	static ArrayList<int[]> check = new ArrayList<>();
 	static int count;
 	static int[][] info;
+	static boolean status;
 	
 	static boolean checkRow(int x, int value) {
 		for (int i = 0; i < 9; i++) {
@@ -36,13 +37,14 @@ public class Main {
 	}
 	
 	static void sudoqu(int depth) {
+		if (status) return;
 		if (depth == count) {
 			for (int[] g : graph) {
 				for (int v : g) System.out.print(v + " ");
 				System.out.println();
 			}
-			
-			System.exit(0);
+			status = true;
+			return;
 		}
 		
 		for (int i = 1; i<10; i++) {
