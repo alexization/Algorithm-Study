@@ -1,50 +1,52 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class Main {
-	
-	static int[] p;
-	
-	static int find(int a) {
-		if (p[a] == a) return a;
-		return p[a] = find(p[a]);
-	}
-	
-	static boolean union(int a, int b) {
-		int aRoot = find(a);
-		int bRoot = find(b);
-		if (aRoot == bRoot) return false;
-		p[aRoot] = bRoot;
-		return true;
-	}
 
 	public static void main(String[] args) throws Exception{
-		Scanner sc = new Scanner(System.in);
-		int V = sc.nextInt();
-		int E = sc.nextInt();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		int N = Integer.parseInt(st.nextToken());
+		int E = Integer.parseInt(st.nextToken());
+		List<int[]>[] g = new List[N+1]; for (int i = 0; i <= N; i++) g[i] = new ArrayList<>();
 		
-		int[][] graph = new int[E][3];
 		for (int i = 0; i < E; i++) {
-			int a = sc.nextInt();
-			int b = sc.nextInt();
-			int cost = sc.nextInt();
-			graph[i] = new int[] {a, b, cost};
+			st = new StringTokenizer(br.readLine(), " ");
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			int cost = Integer.parseInt(st.nextToken());
+			g[a].add(new int[] {b, cost});
+			g[b].add(new int[] {a, cost});
 		}
 		
-		Arrays.sort(graph, (o1, o2) -> Integer.compare(o1[2], o2[2]));
-		
-		p = new int[V + 1];
-		for (int i = 0; i <= V; i++) p[i] = i;
+		boolean[] v = new boolean[N+1];
+		int[] w = new int[N+1];
+		for (int i = 0; i <= N; i++) w[i] = Integer.MAX_VALUE;
 		
 		int sum = 0, cnt = 0;
-		for (int[] e : graph) {
-			if (union(e[0], e[1])) {
-				sum += e[2];
-				if (++cnt == V-1) break;
+		w[1] = 0;
+		for (int i = 1; i <= N; i++) {
+			int min = Integer.MAX_VALUE;
+			int minVertex = -1;
+			for (int j = 1; j <= N; j++) {
+				if (!v[j] && min > w[j]) {
+					min = w[j];
+					minVertex = j;
+				}
+			}
+			
+			v[minVertex] = true;
+			sum += min;
+			if (cnt++ == N-1) break;
+			
+			for (int[] j : g[minVertex]) {
+				if (!v[j[0]] && w[j[0]] > j[1]) {
+					w[j[0]] = j[1];
+				}
 			}
 		}
 		
 		System.out.println(sum);
-		sc.close();
+		br.close();
 	}
 }
