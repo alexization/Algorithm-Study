@@ -31,7 +31,8 @@ public class Main {
 			while (!q.isEmpty()) {
 				int[] temp = q.poll();
 				if (temp[0] == N-1 && temp[1] == N-1) {
-					minValue = Math.min(minValue, temp[2]);
+					minValue = temp[2];
+                    break;
 				}
 				for (int i = 0; i < 4; i++) {
 					int nx = temp[0] + dx[i];
