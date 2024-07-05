@@ -37,6 +37,7 @@ public class Main {
 			g[b].add(new Node(a, cost));
 		}
 		
+		boolean[] v = new boolean[N];
 		long[] dist = new long[N];
 		Arrays.fill(dist, INF);
 		
@@ -45,20 +46,21 @@ public class Main {
 		dist[0] = 0;
 		
 		while (!q.isEmpty()) {
-			Node currNode = q.poll();
+			Node vc = q.poll();
+			int minVertex = vc.index;
+			long min = vc.cost;
 			
-			if (currNode.index == N-1) break;
-			if (dist[currNode.index] < currNode.cost) continue;
+			if(v[minVertex]) continue;
+			v[minVertex] = true;
 			
-			for (Node j : g[currNode.index]) {
-				if (arr[j.index] == 0 || j.index == N - 1) {
-					if (dist[j.index] > dist[currNode.index] + j.cost) {
-						dist[j.index] = dist[currNode.index] + j.cost;
+			for (Node j : g[minVertex]) {
+				if (!v[j.index] && dist[j.index] >  min + j.cost) {
+					if (arr[j.index] == 0 || j.index == N-1) {
+						dist[j.index] = min + j.cost;
 						q.offer(new Node(j.index, dist[j.index]));
 					}
 				}
 			}
-			
 		}
 		if (dist[N-1] == INF) System.out.println(-1);
 		else System.out.println(dist[N-1]);
