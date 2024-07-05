@@ -10,7 +10,7 @@ public class Main {
 		int N = Integer.parseInt(st.nextToken());
 		int K = Integer.parseInt(st.nextToken());
 		
-		int[][] dp = new int[N+1][K+1];
+		int[] dp = new int[K+1];
 		
 		int[] weights = new int[N+1];
 		int[] values = new int[N+1];
@@ -21,16 +21,16 @@ public class Main {
 		}
 		
 		for (int i = 1; i <N+1 ; i++) {
-			for (int j = 1; j < K+1; j++) {
+			for (int j = K; j > 0; j--) {
 				if (weights[i] <= j) {
-					dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j - weights[i]] + values[i]);
+					dp[j] = Math.max(dp[j], dp[j - weights[i]] + values[i]);
 				} else {
-					dp[i][j] = dp[i-1][j];
+					dp[j] = dp[j];
 				}
 			}
 		}
 		
-		System.out.println(dp[N][K]);
+		System.out.println(dp[K]);
 		br.close();
 	}
 }
