@@ -3,6 +3,7 @@ import java.io.*;
 
 public class Main {
 
+    static StringBuilder sb = new StringBuilder();
     static class Node {
         int num;
         Node left;
@@ -19,17 +20,19 @@ public class Main {
         if (node == null) return;
         postOrder(node.left);
         postOrder(node.right);
-        System.out.println(node.num);
+        sb.append(node.num).append("\n");
     }
 
     public static void main(String[] args) throws Exception{
-        Scanner sc = new Scanner(System.in);
-        int value = sc.nextInt();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int value = Integer.parseInt(br.readLine());
         Node root = new Node(value);
 
-        while (sc.hasNext()) {
-            value = sc.nextInt();
-            
+        while (true) {
+            String temp = br.readLine();
+            if (temp == null || temp.isEmpty()) break;
+            value = Integer.parseInt(temp);
+
             Node node = root;
             while (true) {
                 if (value < node.num) {
@@ -54,6 +57,7 @@ public class Main {
             }
         }
         postOrder(root);
-        sc.close();
+        System.out.println(sb);
+        br.close();
     }
 }
