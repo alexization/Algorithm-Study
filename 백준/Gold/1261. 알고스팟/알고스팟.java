@@ -1,49 +1,64 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.StringTokenizer;
 
 public class Main {
 
-	public static void main(String[] args) throws Exception{
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-		
-		int M = Integer.parseInt(st.nextToken());
-		int N = Integer.parseInt(st.nextToken());
-		
-		int[][] g = new int[N][M];
-		for (int i = 0; i < N; i++) {
-			String str = br.readLine();
-			for (int j = 0; j < M; j++) {
-				g[i][j] = (int) (str.charAt(j) - '0');
-			}
-		}
-		
-		int[] dx = {-1, 0, 1, 0};
-		int[] dy = {0, -1, 0, 1};
-		boolean[][] v = new boolean[N][M];
-		PriorityQueue<int[]> q = new PriorityQueue<>((o1, o2) -> Integer.compare(o1[2], o2[2]));
-		q.offer(new int[] {0, 0, 0});
-		v[0][0] = true;
-		
-		int result = -1;
-		while (!q.isEmpty()) {
-			int[] temp = q.poll();
-			if (temp[0] == N-1 && temp[1] == M-1) {
-				result = temp[2];
-			}
-			for (int i = 0; i < 4; i++) {
-				int nx = temp[0] + dx[i];
-				int ny = temp[1] + dy[i];
-				if (nx >= 0 && ny >= 0 && nx < N && ny < M) {
-					if (v[nx][ny]) continue;
-					v[nx][ny] = true;
-					if (g[nx][ny] == 1) q.offer(new int[] {nx, ny, temp[2]+1});
-					else q.offer(new int[] {nx, ny, temp[2]});
-				}
-			}
-		}
-		
-		System.out.println(result);
-		br.close();
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int m = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(st.nextToken());
+
+        char[][] graph = new char[n][m];
+        for (int i = 0; i < n; i++) {
+            String line = br.readLine();
+            for (int j = 0; j < line.length(); j++) {
+                graph[i][j] = line.charAt(j);
+            }
+        }
+
+        Deque<int[]> dq = new LinkedList<>();
+        dq.offer(new int[]{0, 0});
+
+        int[][] broken = new int[n][m];
+        for (int[] b : broken) {
+            Arrays.fill(b, -1);
+        }
+        broken[0][0] = 0;
+
+        int[] dx = {0, 1, 0, -1};
+        int[] dy = {-1, 0, 1, 0};
+
+        while (!dq.isEmpty()) {
+            int[] temp = dq.poll();
+            int x = temp[0];
+            int y = temp[1];
+            if (x == n && y == m) {
+                break;
+            }
+
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
+                if (broken[nx][ny] != -1) continue;
+                if (graph[nx][ny] == '1') {
+                    broken[nx][ny] = broken[x][y] + 1;
+                    dq.offer(new int[]{nx, ny});
+                } else {
+                    broken[nx][ny] = broken[x][y];
+                    dq.addFirst(new int[]{nx, ny});
+                }
+            }
+        }
+
+        System.out.println(broken[n - 1][m - 1]);
+        br.close();
+    }
+
 }
