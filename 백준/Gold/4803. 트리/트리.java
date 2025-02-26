@@ -67,16 +67,12 @@ public class Main {
         int pa = find_parent(a);
         int pb = find_parent(b);
 
-        if (pa > pb) {
-            int temp = pa;
-            pa = pb;
-            pb = temp;
-        }
-
         if (pa == pb) {
             parents[pa] = 0;
-        } else {
+        } else if (pb > pa) {
             parents[pb] = pa;
+        } else {
+            parents[pa] = pb;
         }
     }
 }
