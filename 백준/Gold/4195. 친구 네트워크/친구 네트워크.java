@@ -11,6 +11,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         int t = Integer.parseInt(br.readLine());
 
         for (int i = 0; i < t; i++) {
@@ -34,10 +35,10 @@ public class Main {
                 }
 
                 union(a, b);
-                System.out.println(childCounts.get(find_parent(a)));
+                sb.append(childCounts.get(find_parent(a))).append("\n");
             }
         }
-
+        System.out.println(sb);
         br.close();
     }
 
